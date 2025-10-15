@@ -4,12 +4,14 @@ from PyQt5.QtWidgets import QApplication, QWidget, QLineEdit, QPushButton, QVBox
 class Calculator(QWidget):
     def __init__(self):
         super().__init__()
-
         #App Setting
         self.setWindowTitle("MLSG Calculator")
         self.resize(250, 300)
+        self.setStyleSheet("QWidget {background-color: lightblue;}")
         #Objects
         self.textbox = QLineEdit()
+        #self.textbox.setFont(QFont("Times New Roman", 30))
+        self.textbox.setStyleSheet("QLineEdit {font-size: 30px;}")
         self.grid = QGridLayout()
 
         self.buttons = [
@@ -20,6 +22,8 @@ class Calculator(QWidget):
         ]
         self.clear_button = QPushButton('C')
         self.cut_button = QPushButton('DEL')
+        self.clear_button.setStyleSheet("QPushButton {font: 24px Times; padding: 7px}")
+        self.cut_button.setStyleSheet("QPushButton {font: 24px Times; padding: 7px}")
 
         master_layout = QVBoxLayout()
         master_layout.addWidget(self.textbox)
@@ -28,6 +32,7 @@ class Calculator(QWidget):
         button_row.addWidget(self.clear_button)
         button_row.addWidget(self.cut_button)
         master_layout.addLayout(button_row)
+        master_layout.setContentsMargins(25,25,25,25)
         self.clear_button.clicked.connect(self.button_clicked)
         self.cut_button.clicked.connect(self.button_clicked)
 
@@ -37,6 +42,7 @@ class Calculator(QWidget):
         for button in self.buttons:
             btn = QPushButton(button)
             btn.clicked.connect(self.button_clicked)
+            btn.setStyleSheet("QPushButton {font: 24px Times; padding: 7px}")
             self.grid.addWidget(btn, rows, cols)
             cols += 1
             if cols > 3:
